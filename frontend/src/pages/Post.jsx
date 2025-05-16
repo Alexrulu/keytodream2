@@ -283,7 +283,7 @@ const Post = () => {
                                    initial={{x:100,opacity:0}}
                                    animate={{x:0,  opacity:1}}
                                       exit={{x:100,opacity:0}}
-                                transition={{duration:0.5   }}>
+                                transition={{duration:0.5   }}> 
                       {[1, 2, 3, 4, 5, 6].map((value) => (
                         <p     key={value}
                          className={`py-1 px-3 cursor-pointer text-center duration-300 ${bathroom === value ? 'bg-blue-900 text-white rounded-xl' : ''}`}

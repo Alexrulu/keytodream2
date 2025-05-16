@@ -15,7 +15,7 @@ const Alquilar = () => {
   //API
   const [savedIds, setSavedIds] = useState(new Set())
   const [properties, setProperties] = useState([])
-  const {user, token, setUser} = useAuth()
+  const {user, token, setUser, isLoggedIn} = useAuth()
 
   const query = useQuery()
   const search = query.get('search')?.toLowerCase() || ''
@@ -90,8 +90,10 @@ const Alquilar = () => {
                 <p className="text-xs truncate">{property.description}</p>
                 <h4>{property.personalName}</h4>
               </Link>
-              <i onClick={() => toggleSave(property.id)} className={`fa-heart transition text-xl absolute right-1.5 top-1.5 cursor-pointer
+              {isLoggedIn && (
+                <i onClick={() => toggleSave(property.id)} className={`fa-heart transition text-xl absolute right-1.5 top-1.5 cursor-pointer
                         ${savedIds.has(property.id) ? 'text-red-700 fa-solid' : 'fa-regular text-zinc-500'}`}/>
+              )}
             </article>
           ))
         )}

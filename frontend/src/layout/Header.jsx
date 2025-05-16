@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAuth } from '../components/AuthToken.jsx'
 
@@ -19,6 +19,11 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll);
   }, [])
+  const navigate = useNavigate()
+  const handleLoginClick = () => {
+    sessionStorage.setItem('previousPage', window.location.pathname)
+    navigate('/login')
+  }
 
   //API
   const {isLoggedIn, logout, user, token, setUser, id} = useAuth()
@@ -87,7 +92,6 @@ const Header = () => {
   }
 
   const handleDelete = async () => {
-    if (!confirm('¿Está seguro de que desea eliminar este usuario?')) return
     try {
       const response = await fetch(`http://localhost:5000/api/users/delete/${id}`, {
         method: 'DELETE',
@@ -271,7 +275,7 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link to="/login" className='border-zinc-200 border-1 py-1 bg-zinc-100 rounded-xl text-center'>Iniciar Sesion</Link>
+              <button onClick={handleLoginClick} className='border-zinc-200 border-1 py-1 bg-zinc-100 rounded-xl text-center'>Iniciar Sesion</button>
               <Link to="/register" className='mt-3 border-zinc-900 border-1 py-1 bg-black rounded-xl text-white text-center mb-2'>Registrarse</Link>
             </>
           )}
@@ -460,7 +464,7 @@ const Header = () => {
       ) : (
         <>
           <div className='flex gap-3 ml-auto w-1/3 justify-end'>
-            <Link to="/login" className=' py-1 px-2 text-center  hover:bg-zinc-100 duration-300 rounded-xl'>Iniciar Sesion</Link>
+            <button onClick={handleLoginClick} className=' py-1 px-2 text-center  hover:bg-zinc-100 duration-300 rounded-xl cursor-pointer'>Iniciar Sesion</button>
             <Link to="/register" className='bg-black text-white py-1 px-2 text-center  hover:bg-black/80 duration-300 shadow-xl rounded-xl'>Registrarse</Link>
           </div>
         </>

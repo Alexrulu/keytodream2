@@ -15,6 +15,7 @@ import Login    from "./pages/Login.jsx"
 import Map      from "./pages/Map.jsx"
 import Admin    from "./pages/Admin.jsx"
 import Post     from "./pages/Post.jsx"
+import Terms    from "./pages/Terms.jsx"
 
 import {AuthProvider} from "./components/AuthToken.jsx"
 import ParallaxBackground from "./components/ParallaxBackground.jsx"
@@ -89,6 +90,12 @@ const AnimatedRoutes = () => {
           </motion.div>
         }/>
 
+        <Route path="/terms" element={
+          <motion.div {...pageTransition}>
+            <Terms />
+          </motion.div>
+        }/>
+
       </Routes>
     </AnimatePresence>
   )
@@ -97,7 +104,7 @@ const AnimatedRoutes = () => {
 const App = () => {
   return(
     <AuthProvider>
-      <ToastContainer toastClassName="custom-toast" position="bottom-right" closeButton={false} hideProgressBar autoClose={1000} transition={Zoom} pauseOnHover={false}/>
+      <ToastContainer toastClassName="custom-toast" position="bottom-right" closeButton={false} hideProgressBar autoClose={2000} transition={Zoom} pauseOnHover={false}/>
       <BrowserRouter>
         <Header />
         <ParallaxBackground />

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ const Register = () => {
     }))
   }
 
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!formData.terms || !formData.privacyPolicy) {
@@ -39,6 +41,7 @@ const Register = () => {
       const data = await response.json()
       if (response.ok) {
         toast.success('Registro exitoso.')
+        navigate('/login')
       } else {
         toast.error(data.error || 'Error en el registro.')
       }
@@ -86,7 +89,7 @@ const Register = () => {
             <label htmlFor="privacyPolicy">Acepto las políticas de privacidad</label>
           </div>
           <div className="w-full flex justify-center">
-            <button type="submit" className="mt-10 bg-black text-white py-1 px-2 rounded-xl shadow-xl w-5/10">Registrarme</button>
+            <button type="submit" className="mt-10 bg-black text-white py-1 px-2 rounded-xl shadow-xl w-5/10 cursor-pointer">Registrarme</button>
           </div>
         </div>
       </form>

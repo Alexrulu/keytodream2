@@ -14,7 +14,7 @@ const Article = () => {
 
   //API
   const { id } = useParams()
-  const {user,token,setUser} = useAuth();
+  const {user,token,setUser,isLoggedIn} = useAuth();
   const [savedIds, setSavedIds] = useState(new Set())
 
   useEffect(() => {
@@ -70,7 +70,6 @@ const Article = () => {
   }
 
   const handleDelete = async () => {
-    if (!confirm('¿Estás seguro de que querés eliminar esta propiedad?')) return
     try {
       const response = await fetch(`http://localhost:5000/api/properties/delete/${id}`, {
         method: 'DELETE',
@@ -184,8 +183,10 @@ const Article = () => {
               <div className='flex items-center justify-between w-full md:col-span-2'>
                 <p className='text-2xl font-semibold'>USD ${property.price}</p>
                 <span className='flex items-center gap-3'>
-                  <i onClick={() => toggleSave(property.id)} className={`fa-heart transition text-2xl cursor-pointer
+                  {isLoggedIn && (
+                    <i onClick={() => toggleSave(property.id)} className={`fa-heart transition text-2xl cursor-pointer
                      ${savedIds.has(property.id) ? 'text-red-700 fa-solid' : 'fa-regular text-zinc-500'}`}/>
+                  )}
                   <p className='text-md text-white bg-black py-0.5 px-2 rounded-xl font-inter'>{property.type == 1 ? "Venta" : "Alquiler"}</p>
                 </span>
               </div>

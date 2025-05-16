@@ -34,7 +34,9 @@ const Login = () => {
         const userData = await userRes.json()
         if (userRes.ok) {
           login(token, userData, remember)
-          navigate("/")
+          const previousPage = sessionStorage.getItem('previousPage') || '/'
+          navigate(previousPage)
+          toast.success(`Hola, ${userData.name}.`)
         } else {
           toast.error('Error al obtener los datos del usuario.')
         }

@@ -39,7 +39,6 @@ const Admin = () => {
   }, [])
 
   const handleDeleteUser = async (id) => {
-    if (!confirm('¿Está seguro de que desea eliminar este usuario?')) return
     try {
       const response = await fetch(`http://localhost:5000/api/users/delete/${id}`, {
         method: 'DELETE',
@@ -58,7 +57,6 @@ const Admin = () => {
   }
 
   const handleDelete = async (id) => {
-    if (!confirm('¿Estás seguro de que querés eliminar esta propiedad?')) return
     try {
       const response = await fetch(`http://localhost:5000/api/properties/delete/${id}`, {
         method: 'DELETE',

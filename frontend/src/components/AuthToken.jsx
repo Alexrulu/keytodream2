@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react"
+import { toast } from 'react-toastify'
 
 export const AuthContext = createContext()
 
@@ -43,6 +44,9 @@ export const AuthProvider = ({ children }) => {
   }
 
   const logout = () => {
+    if (user?.name) {
+      toast.success(`Hasta pronto, ${user.name}`)
+    }
     localStorage.removeItem("token")
     sessionStorage.removeItem("token")
     setIsLoggedIn(false)

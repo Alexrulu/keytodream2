@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return(
@@ -10,7 +11,7 @@ const Footer = () => {
                     transition={{duration:2}}>
         <span className=" h-[1px] w-8/10 bg-zinc-300"/>
         <a href="https://alexandrolucero.vercel.app/" target="_blank">Lucero Alexandro</a>
-        <p>Terminos y condiciones</p>
+        <Link to="/terms">Terminos y condiciones</Link>
       </motion.footer>
     </>
   )
